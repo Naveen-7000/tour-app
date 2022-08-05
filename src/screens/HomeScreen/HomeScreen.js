@@ -32,7 +32,7 @@ let decrement=()=>{
             fontSize:22,
             fontWeight:'700',
         }}>
-            dafbwabfabfa
+            Tour app
         </Text>
     </View>
   </SafeAreaView>

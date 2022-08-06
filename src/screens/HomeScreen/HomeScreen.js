@@ -3,17 +3,7 @@ import {View,Text,StatusBar,StyleSheet,} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import colors from '../../constants/colors';
 const HomeScreen = () => {
-    const [count, setcount] = useState(0);
-
-
-
-const increment=()=>{
-  setcount(prev=>count+1);
-}
-let decrement=()=>{
-  if(count!=0)
-  setcount(prev=>count-1);
-}
+ 
   return (
     <SafeAreaView style={{
         backgroundColor: colors.WHITE,

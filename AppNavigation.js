@@ -119,10 +119,10 @@ const AppNavigation = ({auth}) => {
           barStyle="dark-content"
           backgroundColor={colors.WHITE}
         />
-        {/* <NavigationContainer>
+        <NavigationContainer>
           <Authenticationstack />
-        </NavigationContainer> */}
-          {bottomNavigation}
+        </NavigationContainer>
+          {/* {bottomNavigation} */}
       </>
     )
   );

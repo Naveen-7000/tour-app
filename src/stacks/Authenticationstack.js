@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 import colors from '../constants/colors';
-import HomeScreen from '../screens/HomeScreen/HomeScreen';
+import Login from '../screens/Authentication/Login';
 const Stack = createStackNavigator();
 
 const Authenticationstack = () => {
@@ -15,7 +15,7 @@ const Authenticationstack = () => {
         headerTintColor: colors.WHITE,
       }}
     >
-     <Stack.Screen name="Login" component={HomeScreen} />
+     <Stack.Screen name="Login" component={Login} />
 
     </Stack.Navigator>
   )

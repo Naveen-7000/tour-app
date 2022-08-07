@@ -104,7 +104,7 @@ const SignUp2 = () => {
             paddingVertical: 5,
           }}
         >
-          Register in to continue.
+          Register to continue.
         </Text>
       </View>
       <View>

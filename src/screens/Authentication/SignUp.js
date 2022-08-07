@@ -66,10 +66,39 @@ const Signup = () => {
             }}
           >
             <Image source={require("../../../assets/hoemlogo2.png")} />
-            
 
           </View>
         </View>
+        <View
+          style={{
+            paddingVertical: 10,
+            paddingLeft:10
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 32,
+              fontWeight: "600",
+              fontFamily: "ReadexMedium",
+              lineHeight: 35,
+            }}
+          >
+            Register
+          </Text>
+          <Text
+            style={{
+              fontSize: 12,
+              fontWeight: "400",
+              lineHeight: 12,
+              color: colors.GREY,
+              letterSpacing: 0.5,
+              paddingVertical: 5,
+            }}
+          >
+            Register to continue.
+          </Text>
+        </View>
+
     <Formik
             initialValues={intialValue}
             validationSchema={UserSchema}

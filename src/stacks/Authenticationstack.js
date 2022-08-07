@@ -17,8 +17,8 @@ const Authenticationstack = () => {
         headerTintColor: colors.WHITE,
       }}
     >
-     {/* <Stack.Screen name="Login" component={Login} />
-     <Stack.Screen name="SignUp1" component={Signup} /> */}
+     <Stack.Screen name="Login" component={Login} />
+     <Stack.Screen name="SignUp1" component={Signup} />
      <Stack.Screen name="SignUp2" component={SignUp2} />
 
     </Stack.Navigator>

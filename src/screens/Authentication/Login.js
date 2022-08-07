@@ -154,7 +154,7 @@ const Login = () => {
                   }}
                   disabled={!isValid || !dirty}
                   onPress={handleSubmit}
-                  >Submit</Button>
+                  >Login</Button>
                 </View>
               </KeyboardAvoidingView>
             )}

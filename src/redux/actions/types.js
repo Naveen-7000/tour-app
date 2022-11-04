@@ -4,3 +4,4 @@ export const LOGOUT_USER = "LOGOUT_USER";
 export const GET_CURRENT_USER = "GET_CURRENT_USER";
 export const SIGNUP_USER = "SIGNUP_USER";
 export const SET_STACK_MODE = "SET_STACK_MODE";
+export const SET_STATUS_COLOR = "SET_STATUS_COLOR";

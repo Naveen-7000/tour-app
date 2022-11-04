@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../constants/colors";
 import Feicons from "react-native-vector-icons/Feather";
 
-const AuthHeader = () => {
+const AuthHeader = ({navigation}) => {
   return (
     <View
       style={{
@@ -17,7 +17,7 @@ const AuthHeader = () => {
         paddingHorizontal:15,
         paddingVertical:10,
       }}>
-        <Feicons name="chevron-left" size={24} color={colors.BLACK}  />
+        <Feicons name="chevron-left" size={24} color={colors.BLACK} onPress={()=>navigation.goBack()} />
       </View>
     </View>
   );

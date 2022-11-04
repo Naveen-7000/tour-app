@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // checks if we have a token and it is not expired
 export const checkAuth = () => {
   try {
-    const access_token = AsyncStorage.getItem("access_token_bearlyfe");
+    const access_token = AsyncStorage.getItem("access_token_tour");
 
     if (!access_token) {
       return false;
@@ -25,11 +25,14 @@ export const checkAuth = () => {
 
 // gets the token or return null and also makes sure if the token is valid
 export const getToken = () => {
-  if (checkAuth()) {
-    return AsyncStorage.getItem("access_token_bearlyfe");
-  }
-  removeTokens();
-  return null;
+  AsyncStorage.getItem("access_token_tour").then((token) => {
+    if (token) {
+      return token;
+    } else {
+      removeTokens();
+      return null;
+    }
+  });
 };
 
 
@@ -37,8 +40,8 @@ export const getToken = () => {
 
 // fn to remove tokens
 export const removeTokens = () => {
-  AsyncStorage.removeItem("access_token_bearlyf");
-  AsyncStorage.removeItem("refresh_token_bearlyf");
+  AsyncStorage.removeItem("access_token_tour");
+  AsyncStorage.removeItem("refresh_token");
 };
 
 export function dateFormat(date) {

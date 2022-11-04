@@ -3,13 +3,15 @@ export default {
     PRIMARY: "#4BBAD7",
     BLACK: "#000000",
     ERROR: "#FF3333",
-    BAR : "#104268",
-    GREY:"#666363",
-    YELLOW:'#FFD700',
-    LIGHT_BLUE:'#CBDDE7',
-    LIGHT_GREY:'#57575795',
-    LIGHT_PRIMARY:'#4BBAD78F'
-  
-  
-  };
+    BUTTON:"rgba(1, 146, 250, 1)",
+    BASE_TEXT:"rgba(58, 66, 86, 1)",
+    SUB_BASE_TEXT:"rgba(164, 167, 172, 1)",
+    BACKGROUND:"#1d1d1d",
+    GREY:"#808080",
+    STATUS:"#33233e",
+    AVATAR:"#b84078",
+    BLACK:"#525252",
+    OFFWHITE:"#dcdcdc",
+    RED:"#FF0000",
+    };
   

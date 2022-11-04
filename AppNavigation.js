@@ -1,35 +1,45 @@
 import React from 'react';
-import {Text,StatusBar} from 'react-native';
+import {StatusBar} from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import colors from './src/constants/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import App from './App';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { connect, useDispatch } from "react-redux";
 import AppLoading from "expo-app-loading";
-import { useFonts, Inter_900Black,Inter_400Regular,Inter_600SemiBold } from '@expo-google-fonts/inter';
+import { useFonts } from "expo-font";
 import Authenticationstack from './src/stacks/Authenticationstack';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import HomeScreen from './src/screens/HomeScreen/HomeScreen';
+import HomeStack from './src/stacks/HomeStack';
+import { useState } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
+import ProfileStack from './src/stacks/ProfileStack';
+import Profile from './src/screens/ProfileScreen/Profile';
+import { completeLogin } from './src/redux/actions/auth';
+import Search from './src/screens/Search/Search';
+import Plans from './src/screens/Plans/Plans';
+import Calculator from './src/screens/Calculator/Calculator';
 
 
 const Tab = createMaterialBottomTabNavigator();
-
-const AppNavigation = ({auth}) => {
+SplashScreen.preventAutoHideAsync();
+const AppNavigation = ({auth,loginWithToken}) => {
   let [fontsLoaded] = useFonts({
-    Inter_900Black,
+    ReadexBold: require("../tour-app/assets/fonts/ttf/ReadexPro-bold.ttf"),
+    ReadexMedium: require("../tour-app/assets/fonts/ttf/ReadexPro-Medium.ttf"),
+    ReadexLight: require("../tour-app/assets/fonts/ttf/ReadexPro-Light.ttf"),
   });
 
-    const bottomNavigation =(
-          <NavigationContainer>
+   const bottomNavigation =(
+          <NavigationContainer theme={{colors:{background:colors.BACKGROUND}}}>
            <Tab.Navigator  
-        initialRouteName="Home"
+        initialRouteName="bottomNavigation"
         activeColor={colors.PRIMARY}
         shifting={false}
-        inactiveColor={colors.BLACK}
+        inactiveColor={colors.GREY}
         barStyle={{
-          backgroundColor: "#fff",
-          padding: 6,
+          backgroundColor:"#323232",
+          padding: 2,
           justifyContent: "space-between",
           alignItems: "center",
         }}
@@ -39,32 +49,42 @@ const AppNavigation = ({auth}) => {
           },
         }}>
            <Tab.Screen
-          name="Home"
-          component={HomeScreen}
+          name="Explore"
+          component={HomeStack}
           options={{
-            tabBarLabel: "Home",
+            tabBarLabel: "Explore",
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="home" color={color} size={25} />
+              <MaterialCommunityIcons name="home-outline" color={color} size={25} />
             ),
           }}
         />
            <Tab.Screen
-          name="Explore"
-          component={""}
+          name="Search"
+          component={Search}
           options={{
-            tabBarLabel: "Explore",
+            tabBarLabel: "Search",
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="compass" color={color} size={25} />
+              <MaterialIcons name="search" color={color} size={25} />
             ),
           }}
         />
         <Tab.Screen
-          name="Contents"
-          component={""}
+          name="Plan"
+          component={Plans}
           options={{
-            tabBarLabel: "Content",
+            tabBarLabel: "Plan",
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="book" color={color} size={26} />
+              <MaterialCommunityIcons name="heart-outline" color={color} size={26} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Calculator"
+          component={Calculator}
+          options={{
+            tabBarLabel: "Calculator",
+            tabBarIcon: ({ color }) => (
+              <MaterialIcons name="calculate" color={color} size={26} />
             ),
           }}
         />
@@ -76,7 +96,7 @@ const AppNavigation = ({auth}) => {
     const [appReady, setAppReady] = React.useState(false);
     const dispatch = useDispatch();
     const checkLogin = async () => {
-      AsyncStorage.getItem("access_token_bearlyfe").then((token) => {
+      AsyncStorage.getItem("access_token_tour").then((token) => {
         if (token) {
           console.log("----token found on reload", token);
           dispatch(completeLogin(token, true));
@@ -97,35 +117,42 @@ const AppNavigation = ({auth}) => {
         />
       );
     }
-  return auth?.loggedIn && fontsLoaded ?(
+  return auth.stackMode === "default" && auth?.loggedIn && fontsLoaded ?(
     <>
     <StatusBar
-        translucent={true}
-        hidden={false}
-        barStyle="dark-content"
-        backgroundColor={
-          auth.stackMode === "default" ? colors.PRIMARY : colors.WHITE
-        }
+       barStyle="light-content"
+       backgroundColor={colors.STATUS}
+       translucent
       />
-      {bottomNavigation}
+       {bottomNavigation}
       
     </>
   ):(
     fontsLoaded && (
       <>
         <StatusBar
-          translucent={true}
-          hidden={false}
           barStyle="dark-content"
           backgroundColor={colors.WHITE}
         />
         <NavigationContainer>
           <Authenticationstack />
         </NavigationContainer>
-          {/* {bottomNavigation} */}
+               {/* {bottomNavigation} */}
+
       </>
     )
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
 
-export default AppNavigation
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginWithToken: (token) => dispatch(loginWithToken(token)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppNavigation);

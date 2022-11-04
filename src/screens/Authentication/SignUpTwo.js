@@ -1,32 +1,24 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StatusBar,
-  StyleSheet,
-  Image,
-  KeyboardAvoidingView,
-  ScrollView
-} from "react-native";
+import { View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import AuthHeader from "../../components/AuthHeader";
 import colors from "../../constants/colors";
+import AuthHeader from "../../components/AuthHeader";
 import { useFonts } from "expo-font";
 import { Form, Formik, useFormikContext } from "formik";
 import { Button, TextInput } from "react-native-paper";
 import * as Yup from "yup";
 import Logo from '../../../assets/logoSvg.svg';
-import { useDispatch } from "react-redux";
-import { loginUser } from "../../redux/actions/auth";
-const Login = ({navigation}) => {
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+const SignUpTwo = ({ navigation,route }) => {
+    const {fullname,phone} = route.params;
   const [loaded] = useFonts({
     ReadexBold: require("../../../assets/fonts/ttf/ReadexPro-bold.ttf"),
     ReadexMedium: require("../../../assets/fonts/ttf/ReadexPro-Medium.ttf"),
     ReadexLight: require("../../../assets/fonts/ttf/ReadexPro-Light.ttf"),
   });
 
+  if (!loaded) {
+    return null;
+  }
   const intialValue = {
     email: "",
     password: "",
@@ -37,9 +29,14 @@ const Login = ({navigation}) => {
     password: Yup.string().min(8, ({ min }) => `Password must be at least ${min} characters`).required("Password is required"),
   });
 
-
-  const handleSubmit = (values) => {
-    dispatch(loginUser(values,setLoading));
+  const handleRegister = (values) => {
+    let finalValue ={
+        fullname:fullname,
+        phone:phone,
+        email:values.email,
+        password:values.password
+      }
+    return console.log(finalValue);
   };
 
   return (
@@ -83,7 +80,7 @@ const Login = ({navigation}) => {
               lineHeight: 35,
             }}
           >
-            Login
+            Register
           </Text>
           <Text
             style={{
@@ -95,16 +92,16 @@ const Login = ({navigation}) => {
               paddingVertical: 5,
             }}
           >
-            Login in to continue.
+            Register to continue.
           </Text>
         </View>
         <View>
           <Formik
             initialValues={intialValue}
             validationSchema={UserSchema}
-            onSubmit={(values) => handleSubmit(values)}
+            onSubmit={(values) => handleRegister(values)}
           >
-            {({ handleChange, values, errors,isValid,dirty, touched,handleSubmit }) => (
+            {({ handleChange, values, errors, touched,isValid,dirty,handleSubmit }) => (
               <KeyboardAvoidingView behavior="padding">
                 <View
                   style={{
@@ -147,7 +144,6 @@ const Login = ({navigation}) => {
                     width:"95%",
                   }}
                   disabled={!isValid || !dirty}
-                  loading={loading}
                   onPress={handleSubmit}
                   >Submit</Button>
                 </View>
@@ -161,4 +157,4 @@ const Login = ({navigation}) => {
   );
 };
 
-export default Login;
+export default SignUpTwo;

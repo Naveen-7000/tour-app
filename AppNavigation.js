@@ -13,14 +13,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import HomeStack from './src/stacks/HomeStack';
 import { useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
-import ProfileStack from './src/stacks/ProfileStack';
-import Profile from './src/screens/ProfileScreen/Profile';
 import { completeLogin } from './src/redux/actions/auth';
 import Search from './src/screens/Search/Search';
 import Plans from './src/screens/Plans/Plans';
 import Calculator from './src/screens/Calculator/Calculator';
-
-
 const Tab = createMaterialBottomTabNavigator();
 SplashScreen.preventAutoHideAsync();
 const AppNavigation = ({auth,loginWithToken}) => {
@@ -29,12 +25,11 @@ const AppNavigation = ({auth,loginWithToken}) => {
     ReadexMedium: require("../tour-app/assets/fonts/ttf/ReadexPro-Medium.ttf"),
     ReadexLight: require("../tour-app/assets/fonts/ttf/ReadexPro-Light.ttf"),
   });
-
    const bottomNavigation =(
           <NavigationContainer theme={{colors:{background:colors.BACKGROUND}}}>
            <Tab.Navigator  
         initialRouteName="bottomNavigation"
-        activeColor={colors.PRIMARY}
+        activeColor={colors.WHITE}
         shifting={false}
         inactiveColor={colors.GREY}
         barStyle={{
@@ -54,7 +49,7 @@ const AppNavigation = ({auth,loginWithToken}) => {
           options={{
             tabBarLabel: "Explore",
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="home-outline" color={color} size={25} />
+              <MaterialCommunityIcons name="home-outline" color={color} size={25} s />
             ),
           }}
         />
@@ -92,7 +87,6 @@ const AppNavigation = ({auth,loginWithToken}) => {
            </Tab.Navigator>
           </NavigationContainer>
     );
-
     const [appReady, setAppReady] = React.useState(false);
     const dispatch = useDispatch();
     const checkLogin = async () => {
@@ -107,7 +101,6 @@ const AppNavigation = ({auth,loginWithToken}) => {
         }
       });
     };
-
     if (!appReady) {
       return (
         <AppLoading
@@ -148,7 +141,6 @@ const mapStateToProps = (state) => {
     auth: state.auth,
   };
 };
-
 const mapDispatchToProps = (dispatch) => {
   return {
     loginWithToken: (token) => dispatch(loginWithToken(token)),

@@ -28,3 +28,5 @@ const Hotels = ({navigation}) => {
 }
 
 export default Hotels
+
+

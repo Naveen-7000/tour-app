@@ -12,6 +12,7 @@ import {
     loggedIn: false,
     stackMode: "default",
   };
+
   const authReducer = (state = initState, action) => {
     switch (action.type) {
       case LOGIN_USER:

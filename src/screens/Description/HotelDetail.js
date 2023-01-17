@@ -15,8 +15,6 @@ import DynamicHeader from "../../components/DynamicHeader";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useIsFocused } from "@react-navigation/native";
 import { Rating, AirbnbRating } from "react-native-ratings";
-import CustomCaleder from "../../components/Calender/CustomCaleder";
-import Btr from "../../components/CustomBottomSheet/BottomSheet";
 
 const HotelDetail = ({ navigation }) => {
   function FocusAwareStatusBar(props) {
@@ -91,20 +89,6 @@ const HotelDetail = ({ navigation }) => {
               Rating : 4/5
             </Text>
            
-          </View>
-          <View 
-          style={{
-            paddingVertical: 10,
-          }}
-          >
-          <CustomCaleder />
-          </View>
-          <View style={{
-            paddingVertical: 10,
-            
-          }}>
-          <Btr />
-          
           </View>
         </View>
       </ScrollView>
